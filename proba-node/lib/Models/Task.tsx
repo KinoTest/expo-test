@@ -1,5 +1,4 @@
 
-/**  */
 class Task {
     constructor (description: string, state: boolean, id: string = Date.now().toString() ) {
         this.description = description
