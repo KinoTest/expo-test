@@ -1,5 +1,7 @@
-import { Text, View, FlatList } from "react-native";
-import TasksORM from "@/lib/ORMs/TasksORM";
+import { View } from "react-native";
+import TasksORM from "@/lib/Queries/TasksORM";
+import FetchHandler from "./components/FetchHandler";
+import TaskList from "./components/TasksList";
 
 export default function Index() {
   return (
@@ -11,7 +13,10 @@ export default function Index() {
       }}
     >
 
-      <FlatList data={TasksORM.all_tasks} renderItem={item => <Text>{item.item.description}</Text>} keyExtractor={item => item.id}/>
+      <FetchHandler
+        fetchMethod={TasksORM.get_all_tasks}
+        renderComponent={TaskList}
+      />
 
     </View>
   );

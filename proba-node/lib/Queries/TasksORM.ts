@@ -20,8 +20,9 @@ class TasksORM {
         },
       ]
 
-    static get all_tasks () {
-        return this._tasksData.map( item => new Task(item.description, item.done, item.id))
+    static async get_all_tasks () {
+      const response = TasksORM._tasksData.map( item => new Task(item.description, item.done, item.id))
+      return response
     }
 
 }
