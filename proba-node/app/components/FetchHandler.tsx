@@ -13,19 +13,23 @@ export default function FetchHandler ( props: {
     useEffect(()=>{
         props.fetchMethod()
             .then(
-                newData => setData(newData)
-            )
-            .catch(
-                newError => setError(newError)
-            )
-            .finally(
-                () => {
-                    if (error) setOutput(<>{error.message}</>)
-                    else setOutput(<props.renderComponent data={data} />)
+                newData => {
+                    setData(newData)
+                    setError(null)
                 }
             )
-        if (output != loadingOutput) setOutput(loadingOutput)
-    }, []) 
+            .catch(
+                newError => {
+                    setError(newError)
+                    setData(null)
+                }
+            )
+    }, [])
+
+    useEffect(()=>{
+        if (error) setOutput(<>{error.message}</>)
+        else setOutput(<props.renderComponent data={data} />)
+    }, [data, error])
 
     return output
 
