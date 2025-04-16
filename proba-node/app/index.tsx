@@ -14,7 +14,7 @@ export default function Index() {
     >
 
       <FetchHandler
-        fetchMethod={TasksORM.get_all_tasks}
+        fetchMethod={new TasksORM.getAllTasks}
         renderComponent={TaskList}
       />
 
