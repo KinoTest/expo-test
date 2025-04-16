@@ -1,8 +1,6 @@
 import Task from "../Models/Task"
 
-class TasksORM {
-
-    static _tasksData = [
+const _tasksData = [
         {
           id: '0',
           description: 'Un',
@@ -20,8 +18,14 @@ class TasksORM {
         },
       ]
 
-    static async get_all_tasks () {
-      const response = TasksORM._tasksData.map( item => new Task(item.description, item.done, item.id))
+interface TasksORMInterface {
+    async getAllTasks(): Task[]
+}
+
+class TasksORM implements TasksORMInterface {
+
+    async getAllTasks () {
+      const response = _tasksData.map( item => new Task(item.description, item.done, item.id))
       return response
     }
 
