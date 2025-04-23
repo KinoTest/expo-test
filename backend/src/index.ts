@@ -4,6 +4,10 @@ import cors from "cors";
 
 import TasksController from "./TasksController.js";
 
+interface OptionalIdParam {
+  id?: string
+}
+
 const tasksController = new TasksController()
 
 // configures dotenv to work in your application
@@ -17,10 +21,6 @@ const PORT = process.env.PORT;
 app.get("/", (request: Request, response: Response) => { 
   response.status(200).send("Hello World");
 }); 
-
-interface OptionalIdParam {
-  id?: string
-}
 
 app.get('/task/{:id}', (request: Request<OptionalIdParam>, response: Response) => {
   response.status(200).send(tasksController.get(request.params.id))

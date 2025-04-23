@@ -16,7 +16,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "modelos_de_proba": "file:../modelos_de_proba"
+    "modelos_de_proba": "file:../modelos_de_proba/modelos_de_proba-1.0.0.tgz"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
