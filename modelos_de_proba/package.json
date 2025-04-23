@@ -1,0 +1,21 @@
+{
+  "name": "modelos_de_proba",
+  "version": "1.0.0",
+  "description": "Modelos de datos compartidos entre varias partes da aplicación",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "Task.ts"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "typescript": "^5.8.3"
+  }
+}

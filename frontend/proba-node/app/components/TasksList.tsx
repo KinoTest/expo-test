@@ -1,5 +1,5 @@
 import { FlatList, Text } from "react-native";
-import Task from "@/lib/Models/Task";
+import { Task } from "modelos_de_proba";
 
 export default function TaskList (props: {data: Task[]}) {
 
