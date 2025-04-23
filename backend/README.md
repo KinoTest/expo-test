@@ -1,6 +1,7 @@
 # Backend
 
 ```shell
+cp env_template .env
 npm install
 npm run dev
 ```
