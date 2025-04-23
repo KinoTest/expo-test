@@ -23,6 +23,6 @@ Constitue un paquete NPM que permite manter código compartido por varias partes
    ```console
    cd backend
    npm install ../modelos_de_proba-1.0.0.tgz
-   cd ../frontend/proba-node
-   npm install ../../modelos_de_proba/modelos_de_proba-1.0.0.tgz
+   cd ../frontend
+   npm install ../modelos_de_proba/modelos_de_proba-1.0.0.tgz
    ```

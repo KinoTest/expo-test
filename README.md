@@ -9,7 +9,7 @@ npm run dev
 ```
 Terminal #2
 ```shell
-cd frontend/proba-node
+cd frontend
 npm install # Only first time
 npx expo start
 ```
