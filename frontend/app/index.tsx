@@ -1,9 +1,9 @@
 import { View } from "react-native";
 import FetchHandler from "./components/FetchHandler";
 import TaskList from "./components/TasksList";
-import TasksORM from "@/lib/Queries/TasksORM";
+import TasksQueries from "@/lib/queries/TasksQueries";
 
-const tasksService = new TasksORM()
+const tasksService = new TasksQueries()
 
 export default function Index() {
   return (

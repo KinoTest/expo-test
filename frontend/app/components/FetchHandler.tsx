@@ -1,3 +1,9 @@
+/**
+ * Gets fetchMethod output and pass it to renderComponent data prop.
+ * If fetchMethod fails, show exception description.
+ * Shows loadingOutput component while fetchMethod runs.
+ */
+
 import { useEffect, useState } from "react"
 
 export default function FetchHandler ( props: {

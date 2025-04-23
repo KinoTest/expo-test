@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import TasksController from "./TasksController.js";
+import TasksController from "./controllers/TasksController.js";
 
 interface OptionalIdParam {
   id?: string
@@ -17,10 +17,6 @@ const app = express();
 app.use(cors())
 
 const PORT = process.env.PORT;
-
-app.get("/", (request: Request, response: Response) => { 
-  response.status(200).send("Hello World");
-}); 
 
 app.get('/task/{:id}', (request: Request<OptionalIdParam>, response: Response) => {
   response.status(200).send(tasksController.get(request.params.id))
