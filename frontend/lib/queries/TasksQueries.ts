@@ -21,7 +21,7 @@ class TasksQueries implements TasksQueriesInterface {
     }
     async postTask(task: Task) {
         //TODO
-        return new Task('', false, '') //TODO: Make tasks id nullable
+        return new Task('', false)
     }
     async putTask(task: Task) {
         const response = await fetch(`${backendHostURL}/task/`, {
