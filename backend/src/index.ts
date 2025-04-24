@@ -18,8 +18,9 @@ app.use(cors())
 
 const PORT = process.env.PORT;
 
-app.get('/task/{:id}', (request: Request<OptionalIdParam>, response: Response) => {
-  response.status(200).send(tasksController.get(request.params.id))
+app.get('/task/{:id}', async (request: Request<OptionalIdParam>, response: Response) => {
+  const output = await tasksController.get(request.params.id)
+  response.status(200).send(output)
 })
 
 app.listen(PORT, () => { 
