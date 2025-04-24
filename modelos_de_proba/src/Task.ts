@@ -1,11 +1,11 @@
 
 class Task {
-    constructor (description: string, state: boolean, id: string = Date.now().toString() ) {
+    constructor (description: string, state: boolean, id?: string) {
         this.description = description
         this.done = state
         this.id = id
     }
-    id: string
+    id
     description
     done
 }

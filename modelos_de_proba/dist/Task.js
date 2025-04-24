@@ -1,5 +1,5 @@
 class Task {
-    constructor(description, state, id = Date.now().toString()) {
+    constructor(description, state, id) {
         this.description = description;
         this.done = state;
         this.id = id;
