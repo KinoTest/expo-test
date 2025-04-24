@@ -4,7 +4,8 @@ import { backendHostURL } from "../config"
 interface TasksQueriesInterface {
     getAllTasks(): Promise<Task[]>
     getTask(id: string): Promise<Task|undefined>
-    postTask(task: Task): Promise<boolean>
+    postTask(task: Task): Promise<Task>
+    putTask(task: Task): Promise<Task>
 }
 
 class TasksQueries implements TasksQueriesInterface {
@@ -15,12 +16,23 @@ class TasksQueries implements TasksQueriesInterface {
         return output
     }
     async getTask(id: string) {
-        /**TODO */
+        //TODO
         return undefined
     }
     async postTask(task: Task) {
-        /**TODO */
-        return false
+        //TODO
+        return new Task('', false, '') //TODO: Make tasks id nullable
+    }
+    async putTask(task: Task) {
+        const response = await fetch(`${backendHostURL}/task/`, {
+            method: 'PUT',
+            body: JSON.stringify(task),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok) throw new Error(response.statusText);
+        return response.json()
     }
 }
 
