@@ -1,34 +1,50 @@
-import { Switch, Text, TextInput, View } from "react-native";
+import { Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Task } from "modelos_de_proba";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function TaskComponent (props: {task: Task}) {
+export default function TaskComponent (props: {task: Task, updateTask: (task: Task)=>any }) {
 
-    const [isEnabled, setIsEnabled] = useState(props.task.done)
+    const [actualTask, setActualTask] = useState(props.task)
+
+    const [isEnabled, setIsEnabled] = useState(actualTask.done)
     const [inEditionMode, setInEditionMode] = useState(false)
 
     function toggleSwitch() {
         setIsEnabled(!isEnabled)
     }
 
-    function onChangeText(text: string) {
-        /**TODO: Actualizar props, actualizar modelo */
+    function enableEditionMode() {
+        setInEditionMode(true)
     }
 
+    function disableEditionMode() {
+        setInEditionMode(false)
+    }
+
+    function onChangeText(text: string) {
+        const newTask = new Task(text, actualTask.done, actualTask.id)
+        setActualTask(newTask)
+        props.updateTask(actualTask)
+    }
+
+    useEffect(()=>{},[actualTask])
+
     return <View>
-        {/**TODO: if inEditionMode, on touch, toggle inEditionMode */}
         { inEditionMode ?
             <TextInput
                 onChangeText={onChangeText}
-                value={props.task.description}
+                onBlur={disableEditionMode}
+                autoFocus={true}
+                value={actualTask.description}
                 placeholder="useless placeholder"
                 keyboardType="numeric"
             />
             :
-            <Text>
-                {/**TODO: if ! inEditionMode, on touch, toggle inEditionMode */}
-                {props.task.description}
-            </Text>
+            <TouchableOpacity onPress={enableEditionMode}>
+                <Text>
+                    {actualTask.description}
+                </Text>
+            </TouchableOpacity>
         }
         <Switch
             trackColor={{false: '#767577', true: '#81b0ff'}}
