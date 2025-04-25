@@ -3,8 +3,9 @@
 Terminal #1
 ```shell
 cd backend
-cp env_template .env # Only first time
-npm install # Only first time
+cp env_template .env
+npm install
+npx prisma migrate dev --name init # Crear base de datos de desenvolvemento e cliente Prisma.
 npm run dev
 ```
 Terminal #2
@@ -12,6 +13,11 @@ Terminal #2
 cd frontend
 npm install # Only first time
 npx expo start
+```
+## Backend
+It's possible to reset database information:
+```shell
+npx prisma migrate reset
 ```
 
 ## ToDo
