@@ -1,5 +1,4 @@
-import { Task } from "modelos_de_proba"
-import TasksStore from "../stores/TasksStore.js"
+import { TasksStore } from "../stores/TasksStore.js"
 
 const taskStore = new TasksStore()
 
