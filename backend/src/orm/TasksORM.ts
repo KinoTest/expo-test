@@ -1,25 +1,26 @@
-import { Task } from "modelos_de_proba"
+import { prisma as orm } from "../index.js"
+import { taskCompatibleMap } from "modelos_de_proba"
 
-const _tasksData = [
-    {
-        id: '0',
-        description: 'Un',
-        done: false
-    },
-    {
-        id: '1',
-        description: 'Outro',
-        done: true
-    },
-    {
-        id: '2',
-        description: 'Fin',
-        done: false
-    },
-]
+interface TasksORMInterface {
+    readAll(): Promise<taskCompatibleMap[]>
+    read(id: string): Promise<taskCompatibleMap|null>
+}
 
-const tasksObjects = _tasksData.map( taskData => new Task(taskData.description, taskData.done, taskData.id))
+class TasksORM implements TasksORMInterface {
+    readAll() {
+        const rowsPromise = orm.task.findMany()
+        return rowsPromise
+    }
+    read(id: string) {
+        const rowPromise = orm.task.findUnique({
+            where: {
+                id: id
+            }
+        })
+        return rowPromise
+    }
+}
 
 export {
-    tasksObjects
+    TasksORM
 }

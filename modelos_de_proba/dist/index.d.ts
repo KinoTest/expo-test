@@ -1,2 +1,3 @@
 import Task from "./Task.js";
-export { Task };
+import { taskCompatibleMap } from "./types.js";
+export { Task, taskCompatibleMap };

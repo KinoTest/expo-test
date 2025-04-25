@@ -1,18 +1,32 @@
-import { Task } from "modelos_de_proba"
-import { tasksObjects } from "../orm/TasksORM.js"
+import { Task, taskCompatibleMap } from "modelos_de_proba"
+import { TasksORM } from "../orm/TasksORM.js"
+
+const tasksORM = new TasksORM()
+
+function rowToTask ( row: taskCompatibleMap ): Task {
+    return new Task(row.description, row.done, row.id)
+}
+
+function rowsToTasks( rows: taskCompatibleMap[] ): Task[] {
+    return rows.map( row => rowToTask(row) )
+}
 
 interface TasksStoreInterface {
     readAll(): Promise<Task[]>
-    read(id: string): Promise<Task|undefined>
+    read(id: string): Promise<Task|null>
 }
 
 class TasksStore implements TasksStoreInterface {
     async readAll () {
-        return tasksObjects
+        const rows = await tasksORM.readAll()
+        return rowsToTasks(rows)
     }
-    async read(id: string) {
-        return tasksObjects.find( item => item.id === id )
+    async read (id: string) {
+        const row = await tasksORM.read(id)
+        return row === null ? null : rowToTask(row)
     }
 }
 
-export default TasksStore
+export {
+    TasksStore
+}

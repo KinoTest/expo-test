@@ -1,13 +1,16 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import TasksController from "./controllers/TasksController.js";
 import bodyParser from "body-parser";
+import { PrismaClient } from "../prisma/PrismaClient/index.js"
+
+import TasksController from "./controllers/TasksController.js";
 
 interface OptionalIdParam {
   id?: string
 }
 
+const prisma = new PrismaClient()
 const jsonMiddleware = bodyParser.json()
 const tasksController = new TasksController()
 
@@ -36,3 +39,18 @@ app.listen(PORT, () => {
   // gracefully handle error
   throw new Error(error.message);
 });
+
+app.on('exit', async ()=>{
+  try {
+    await prisma.$disconnect()
+  } catch (exception) {
+    console.error(exception) //TODO: Exception handler service
+    await prisma.$disconnect()
+    process.exit(1)
+  }
+
+})
+
+export {
+  prisma //TODO Refactorize file instantiation/configuration/endpoints
+}
