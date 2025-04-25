@@ -14,8 +14,9 @@ npm install # Only first time
 npx expo start
 ```
 
-## ToDo
+## TODO
 * Read about multi-repo
+* Frontend languaje/locales
 
 ## References
 [Creating an npm package with TypeScript](https://medium.com/@the_nick_morgan/creating-an-npm-package-with-typescript-c38b97a793cf)
