@@ -3,6 +3,7 @@
 ```shell
 cp env_template .env
 npm install
+npx prisma migrate dev --name init # Crear base de datos de desenvolvemento e cliente Prisma.
 npm run dev
 ```
 

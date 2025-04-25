@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./prisma"
+  output   = "PrismaClient"
 }
 
 datasource db {
@@ -13,6 +13,6 @@ datasource db {
 
 model Task {
   id          String @id
-  description String @default('')
+  description String @default("")
   done        Boolean
 }
