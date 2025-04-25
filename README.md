@@ -1,14 +1,14 @@
 # Kinotest PoC
 ## Starting
-Terminal #1
+Terminal #1 - Backend
 ```shell
 cd backend
 cp env_template .env
 npm install
-npx prisma migrate dev --name init # Crear base de datos de desenvolvemento e cliente Prisma.
+npx prisma migrate dev # Crear base de datos de desenvolvemento e cliente Prisma.
 npm run dev
 ```
-Terminal #2
+Terminal #2 - Frontend
 ```shell
 cd frontend
 npm install # Only first time
@@ -19,9 +19,6 @@ It's possible to reset database information:
 ```shell
 npx prisma migrate reset
 ```
-
-## ToDo
-* Read about multi-repo
 
 ## References
 [Creating an npm package with TypeScript](https://medium.com/@the_nick_morgan/creating-an-npm-package-with-typescript-c38b97a793cf)
