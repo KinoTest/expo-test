@@ -1,4 +1,6 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import { i18n } from "@/lib/locales/i18n";
+
 import FetchHandler from "./services/FetchHandlerService";
 import TaskListComponent from "./components/TasksListComponent";
 import TasksQueries from "@/lib/queries/TasksQueries";
@@ -14,6 +16,8 @@ export default function Index() {
         alignItems: "center",
       }}
     >
+
+      <Text>{i18n.t("tasks_list_title", {name: "Toño"})}</Text>
 
       <FetchHandler
         fetchMethod={ tasksService.getAllTasks }
