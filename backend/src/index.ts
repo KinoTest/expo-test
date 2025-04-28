@@ -30,5 +30,5 @@ server.on('exit', async ()=>{
 })
 
 export {
-  prisma, //TODO Refactorize file instantiation/configuration/endpoints
+  prisma,
 }
