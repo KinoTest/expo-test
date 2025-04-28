@@ -14,6 +14,7 @@ function rowsToTasks( rows: taskCompatibleMap[] ): Task[] {
 interface TasksStoreInterface {
     readAll(): Promise<Task[]>
     read(id: string): Promise<Task|null>
+    update(task: taskCompatibleMap): Promise<Task|null>
 }
 
 class TasksStore implements TasksStoreInterface {
@@ -23,6 +24,10 @@ class TasksStore implements TasksStoreInterface {
     }
     async read (id: string) {
         const row = await tasksORM.read(id)
+        return row === null ? null : rowToTask(row)
+    }
+    async update (task: taskCompatibleMap) {
+        const row = await tasksORM.update(task)
         return row === null ? null : rowToTask(row)
     }
 }

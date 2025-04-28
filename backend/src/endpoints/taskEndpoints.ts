@@ -11,9 +11,12 @@ router.get('/task/{:id}', async (request: Request<{ id?: string }>, response: Re
   })
   
 router.put('/task/', jsonMiddleware, async (request: Request, response: Response) => {
-    console.log(request.body)
-    response.status(200).send(JSON.stringify(request.body))
-    //TODO: Update database row
+    const data = await tasksController.put(request.body)
+    if (data === null) {
+      response.status(404).send()
+      return
+    }
+    response.status(200).send(JSON.stringify(data))
 })
 
 export default router

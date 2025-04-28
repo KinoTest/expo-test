@@ -4,6 +4,7 @@ import { taskCompatibleMap } from "modelos_de_proba"
 interface TasksORMInterface {
     readAll(): Promise<taskCompatibleMap[]>
     read(id: string): Promise<taskCompatibleMap|null>
+    update(task: taskCompatibleMap): Promise<taskCompatibleMap|null>
 }
 
 class TasksORM implements TasksORMInterface {
@@ -18,6 +19,23 @@ class TasksORM implements TasksORMInterface {
             }
         })
         return rowPromise
+    }
+    async update(task: taskCompatibleMap) {
+        try {
+            const rowPromise = await orm.task.update({
+                where: {
+                    id: task.id
+                },
+                data: {
+                    description: task.description,
+                    done: task.done
+                }
+            })
+            return rowPromise
+        } catch (exception) {
+            console.error(exception) //TODO: exception service
+            return null
+        }
     }
 }
 
