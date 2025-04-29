@@ -5,17 +5,34 @@ Terminal #1 - Backend
 cd backend
 cp env_template .env
 npm install
-npx prisma migrate dev # Crear base de datos de desenvolvemento e cliente Prisma.
+npx prisma migrate dev
 npm run dev
 ```
 Terminal #2 - Frontend
 ```shell
 cd frontend
-npm install # Only first time
+npm install
 npx expo start
 ```
+## After every pull of changes
+We need to update environment variables, NPM modules and database migrations 
+Terminal #1 - Backend
+```shell
+cd backend
+diff .env env_template # Linux
+diff (cat .env) (cat env_template) # Powershell
+# Make modifications in your .env basis env_template new proposes, if any.
+npm install
+npx prisma migrate
+```
+Terminal #2 - Frontend
+```shell
+cd frontend
+npm install
+```
+
 ## Backend
-It's possible to reset database information:
+It's possible to reset local development database information:
 ```shell
 npx prisma migrate reset
 ```
