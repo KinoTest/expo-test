@@ -22,3 +22,4 @@ npx prisma migrate reset
 
 ## References
 [Creating an npm package with TypeScript](https://medium.com/@the_nick_morgan/creating-an-npm-package-with-typescript-c38b97a793cf)
+[Localization](https://medium.com/@adherentxu/i18n-in-your-react-native-or-expo-apps-eb92a1a8b1b5)
