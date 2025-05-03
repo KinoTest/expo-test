@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import { i18n } from "@/lib/locales/i18n";
+import { i18n } from "@/locales/i18n";
 
 import FetchHandler from "./services/FetchHandlerService";
 import TaskListComponent from "./components/TasksListComponent";
