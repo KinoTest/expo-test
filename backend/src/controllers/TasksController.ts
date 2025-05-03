@@ -1,6 +1,5 @@
 import { Task, taskCompatibleMap } from "modelos_de_proba"
 import { TasksStore } from "../stores/TasksStore.js"
-import { response } from "express"
 
 const tasksStore = new TasksStore()
 
