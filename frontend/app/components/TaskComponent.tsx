@@ -1,6 +1,9 @@
-import { Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Switch, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import KTViewComponent from "./KTViewComponent";
 import { Task } from "modelos_de_proba";
 import { useEffect, useState } from "react";
+import { i18n } from "@/locales/i18n";
+import { defaultMargins } from "../Styles";
 
 export default function TaskComponent (props: {task: Task, updateTask: (task: Task)=>any }) {
 
@@ -29,7 +32,7 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
 
     useEffect(()=>{},[actualTask])
 
-    return <View>
+    return <KTViewComponent >
         { inEditionMode ?
             <TextInput
                 onChangeText={onChangeText}
@@ -38,10 +41,11 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
                 value={actualTask.description}
                 placeholder="useless placeholder"
                 keyboardType="numeric"
+                style={defaultMargins}
             />
             :
             <TouchableOpacity onPress={enableEditionMode}>
-                <Text>
+                <Text style={defaultMargins}>
                     {actualTask.description}
                 </Text>
             </TouchableOpacity>
@@ -52,8 +56,10 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
             value={isEnabled}
+            style={defaultMargins}
         />
-    </View>
+        <Text>{i18n.t('done')}</Text>
+    </KTViewComponent>
 
 }
 
