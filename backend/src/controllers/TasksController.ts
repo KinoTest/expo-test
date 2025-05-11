@@ -1,12 +1,8 @@
-import { Task, taskCompatibleMap } from "modelos_de_proba"
-import { TasksStore } from "../stores/TasksStore.js"
+import { taskCompatibleMap } from "modelos_de_proba"
+import { TasksRepo } from "../repos/TasksRepo.js"
+import TasksControllerInterface from "./TasksControllerInterface.js"
 
-const tasksStore = new TasksStore()
-
-interface TasksControllerInterface {
-    get( id?: string): Promise<string>
-    put( task: taskCompatibleMap ): Promise<Task|null>
-}
+const tasksStore = new TasksRepo()
 
 class TasksController implements TasksControllerInterface {
     async get (id?: string) {
