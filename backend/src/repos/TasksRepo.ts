@@ -1,5 +1,6 @@
 import { Task, taskCompatibleMap } from "modelos_de_proba"
 import { TasksORM } from "../orm/TasksORM.js"
+import TasksRepoInterface from "./TasksRepoInterface.js"
 
 const tasksORM = new TasksORM()
 
@@ -11,13 +12,7 @@ function rowsToTasks( rows: taskCompatibleMap[] ): Task[] {
     return rows.map( row => rowToTask(row) )
 }
 
-interface TasksStoreInterface {
-    readAll(): Promise<Task[]>
-    read(id: string): Promise<Task|null>
-    update(task: taskCompatibleMap): Promise<Task|null>
-}
-
-class TasksStore implements TasksStoreInterface {
+class TasksRepo implements TasksRepoInterface {
     async readAll () {
         const rows = await tasksORM.readAll()
         return rowsToTasks(rows)
@@ -33,5 +28,5 @@ class TasksStore implements TasksStoreInterface {
 }
 
 export {
-    TasksStore
+    TasksRepo
 }
