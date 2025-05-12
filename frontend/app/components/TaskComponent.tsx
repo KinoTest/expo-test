@@ -1,16 +1,20 @@
-import { Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TextInput, TouchableOpacity } from "react-native";
+import KTViewComponent from "./KTViewComponent";
 import { Task } from "modelos_de_proba";
 import { useEffect, useState } from "react";
+import { i18n } from "@/locales/i18n";
+import { defaultMargins, defaultSpacing, taskComponentStyle } from "../Styles";
+import SwitchComponent from "./SwitchComponent";
 
 export default function TaskComponent (props: {task: Task, updateTask: (task: Task)=>any }) {
 
     const [actualTask, setActualTask] = useState(props.task)
 
-    const [isEnabled, setIsEnabled] = useState(actualTask.done)
     const [inEditionMode, setInEditionMode] = useState(false)
 
-    function toggleSwitch() {
-        setIsEnabled(!isEnabled)
+    function onSwitchChannge(checked: boolean) {
+        const newTask = new Task(actualTask.description, checked, actualTask.id)
+        setActualTask(newTask)
     }
 
     function enableEditionMode() {
@@ -24,36 +28,40 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
     function onChangeText(text: string) {
         const newTask = new Task(text, actualTask.done, actualTask.id)
         setActualTask(newTask)
-        props.updateTask(actualTask)
     }
 
-    useEffect(()=>{},[actualTask])
+    useEffect(()=>{
+        props.updateTask(actualTask)
+    },[
+        actualTask,
+    ])
 
-    return <View>
+    return <KTViewComponent style={taskComponentStyle}>
+
         { inEditionMode ?
+
             <TextInput
                 onChangeText={onChangeText}
                 onBlur={disableEditionMode}
                 autoFocus={true}
                 value={actualTask.description}
                 placeholder="useless placeholder"
-                keyboardType="numeric"
+                style={defaultSpacing}
             />
+
             :
+
             <TouchableOpacity onPress={enableEditionMode}>
-                <Text>
+                <Text style={defaultMargins}>
                     {actualTask.description}
                 </Text>
             </TouchableOpacity>
+
         }
-        <Switch
-            trackColor={{false: '#767577', true: '#81b0ff'}}
-            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-        />
-    </View>
+
+        <SwitchComponent description={i18n.t('done')} checked={actualTask.done} onToggle={onSwitchChannge}/>
+
+    </KTViewComponent>
 
 }
 

@@ -1,11 +1,6 @@
 import { prisma as orm } from "../index.js"
 import { taskCompatibleMap } from "modelos_de_proba"
-
-interface TasksORMInterface {
-    readAll(): Promise<taskCompatibleMap[]>
-    read(id: string): Promise<taskCompatibleMap|null>
-    update(task: taskCompatibleMap): Promise<taskCompatibleMap|null>
-}
+import TasksORMInterface from "./TasksORMInterface.js"
 
 class TasksORM implements TasksORMInterface {
     readAll() {
