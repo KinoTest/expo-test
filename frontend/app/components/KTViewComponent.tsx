@@ -1,9 +1,7 @@
-import { PropsWithChildren, cloneElement, ReactElement } from "react";
-import { View } from "react-native";
-import { container } from "../Styles";
+import { StyleProp, View, ViewStyle } from "react-native";
 
-function KTViewComponent ( props: PropsWithChildren) {
-    return <View style={container}>
+function KTViewComponent ( props: { children: React.ReactNode, style: StyleProp<ViewStyle>}) {
+    return <View style={props.style}>
         { props.children  }
     </View>
 }
