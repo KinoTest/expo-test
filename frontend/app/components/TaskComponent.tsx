@@ -1,4 +1,4 @@
-import { Switch, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { Switch, Text, TextInput, TouchableOpacity } from "react-native";
 import KTViewComponent from "./KTViewComponent";
 import { Task } from "modelos_de_proba";
 import { useEffect, useState } from "react";

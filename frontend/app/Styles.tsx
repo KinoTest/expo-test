@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native"
+import { StyleProp, StyleSheet, ViewStyle } from "react-native"
 
 const defaultMarginValue = 10
 const defaultPaddingValue = 10
@@ -26,14 +26,24 @@ const { container } = StyleSheet.create ({
     }
 })
 
-const { cardElement } = StyleSheet.create({
-    cardElement: {
+const { cardComponent } = StyleSheet.create({
+    cardComponent: {
         ...defaultMargins
     }
-}) 
+} ) 
+
+const cosa = StyleSheet.create({
+    switchComponent: {
+        flex: 1,
+        flexDirection: "row"
+    }
+})
+
+const { switchComponent } = cosa // TODO: What the fuking fuck!!!
 
 export {
     defaultMargins,
     container,
-    cardElement
+    cardComponent,
+    switchComponent
 }
