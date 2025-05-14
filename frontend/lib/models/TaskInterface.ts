@@ -19,7 +19,7 @@ type TaskMethodsObjectInterface = {
         readAll(): [TaskInterface]
         count(): number
     },
-    dinamyc: {
+    dynamic: {
         update(): Promise<TaskInterface>
         delete(): Promise<boolean>
     }

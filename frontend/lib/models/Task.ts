@@ -2,22 +2,25 @@ import { TaskAbstract, TaskInterface, TaskMethodsObjectInterface } from "./TaskI
 
 function TaskFactory (methods: TaskMethodsObjectInterface) {
     class Task implements TaskAbstract {
-        constructor ( description: string, done: boolean, methods: TaskMethodsObjectInterface, id?: string ) {
+        constructor ( description: string, done: boolean, id?: string ) {
             this.description = description
             this.done = done
             this.id = id
-            this.delete = methods.dinamyc.delete
-            this.update = methods.dinamyc.update
+            /** Using closures for injecting methods as dependencies */
+            this.delete = methods.dynamic.delete
+            this.update = methods.dynamic.update
         }
         description: string
         done: boolean
         id?: string
         delete: () => Promise<boolean>
         update: () => Promise<Task>
+        /** Using closures for injecting methods as dependencies */
         static read = methods.static.read
         static readAll = methods.static.readAll
         static count = methods.static.count
     }
+    return Task
 }
 
 const methods: TaskMethodsObjectInterface = {
@@ -32,7 +35,7 @@ const methods: TaskMethodsObjectInterface = {
             throw new Error("Function not implemented.")
         }
     },
-    dinamyc: {
+    dynamic: {
         update: function (): Promise<TaskInterface> {
             throw new Error("Function not implemented.")
         },
