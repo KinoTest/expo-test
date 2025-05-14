@@ -32,7 +32,7 @@
     "expo-system-ui": "~4.0.9",
     "expo-web-browser": "~14.0.2",
     "i18n-js": "^4.5.1",
-    "modelos_de_proba": "file:../modelos_de_proba/modelos_de_proba-1.1.0.tgz",
+    "modelos_de_proba": "file:../modelos_de_proba/modelos_de_proba-2.0.0.tgz",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.9",
