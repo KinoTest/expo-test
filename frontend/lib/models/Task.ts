@@ -1,37 +1,18 @@
 import { TaskAbstract, TaskInterface, TaskMethodsObjectInterface } from "./TaskInterface"
+import TasksQueries from "../queries/TasksQueries"
 
-function TaskFactory (methods: TaskMethodsObjectInterface) {
-    class Task implements TaskAbstract {
-        constructor ( description: string, done: boolean, id?: string ) {
-            this.description = description
-            this.done = done
-            this.id = id
-            /** Using closures for injecting methods as dependencies */
-            this.delete = methods.dynamic.delete
-            this.update = methods.dynamic.update
-        }
-        description: string
-        done: boolean
-        id?: string
-        delete: () => Promise<boolean>
-        update: () => Promise<Task>
-        /** Using closures for injecting methods as dependencies */
-        static read = methods.static.read
-        static readAll = methods.static.readAll
-        static count = methods.static.count
-    }
-    return Task
-}
+const taskQueries = new TasksQueries()
 
 const methods: TaskMethodsObjectInterface = {
     static: {
-        read: function (id: string): TaskInterface | null {
+        read: function (id: string) {
             throw new Error("Function not implemented.")
         },
-        readAll: function (): [TaskInterface] {
-            throw new Error("Function not implemented.")
+        readAll: function () {
+            const tasksPromise = taskQueries.getAllTasks()
+            return tasksPromise
         },
-        count: function (): number {
+        count: async function () {
             throw new Error("Function not implemented.")
         }
     },
@@ -45,7 +26,22 @@ const methods: TaskMethodsObjectInterface = {
     }
 }
 
-const Task = TaskFactory(methods)
+class Task extends TaskAbstract {
+    constructor ( description: string, done: boolean, id?: string, methodsInjection?: TaskMethodsObjectInterface ) {
+        super(description, done,  id)
+        /** Using closures for injecting methods as dependencies */
+        this.delete = methodsInjection ? methodsInjection.dynamic.delete :  methods.dynamic.delete
+        this.update = methodsInjection ? methodsInjection.dynamic.update : methods.dynamic.update
+    }
+}
+
+function addTaskStaticMethods ( methodsInjection: TaskMethodsObjectInterface = methods) {
+    Task.count = methodsInjection.static.count
+    Task.read = methodsInjection.static.read
+    Task.readAll = methodsInjection.static.readAll
+}
+
+addTaskStaticMethods()
 
 export {
     Task

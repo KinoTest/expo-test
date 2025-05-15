@@ -1,27 +1,20 @@
-import { Task } from "modelos_de_proba"
+import { taskCompatibleMap } from "modelos_de_proba"
 import { backendHostURL } from "../config"
-
-interface TasksQueriesInterface {
-    getAllTasks(): Promise<Task[]>
-    getTask(id: string): Promise<Task|undefined>
-    postTask(task: Task): Promise<Task>
-    putTask(task: Task): Promise<Task>
-}
+import { Task } from "../models/Task"
+import TasksQueriesInterface from "./TasksQueriesInterface"
 
 class TasksQueries implements TasksQueriesInterface {
     async getAllTasks () {
         const response = await fetch(`${backendHostURL}/task/`)
-        const data = await response.json()
-        const output = data.map( (item: { description: string; done: boolean; id: string | undefined }) => new Task(item.description, item.done, item.id))
+        const data: taskCompatibleMap[] = await response.json()
+        const output = data.map( (item) => new Task(item.description, item.done, item.id))
         return output
     }
     async getTask(id: string) {
-        //TODO
-        return undefined
+        throw new Error('//TODO: Method not implemented!')
     }
     async postTask(task: Task) {
-        //TODO
-        return new Task('', false)
+        throw new Error('//TODO: Method not implemented!')
     }
     async putTask(task: Task) {
         const response = await fetch(`${backendHostURL}/task/`, {

@@ -8,16 +8,16 @@ interface TaskInterface extends AnemicTask {
 abstract class TaskAbstract extends AnemicTask {
     update!: ()=>Promise<TaskInterface>
     delete!: ()=>Promise<boolean>
-    static read: (id: string) => TaskInterface | null
-    static readAll: () => [TaskInterface]
-    static count: () => number
+    static read: (id: string) => Promise<TaskInterface | undefined>
+    static readAll: () => Promise<TaskInterface[]>
+    static count: () => Promise<number>
 }
 
 type TaskMethodsObjectInterface = {
     static: {
-        read(id: string): TaskInterface | null
-        readAll(): [TaskInterface]
-        count(): number
+        read(id: string): Promise<TaskInterface | undefined>
+        readAll(): Promise<TaskInterface[]>
+        count(): Promise<number>
     },
     dynamic: {
         update(): Promise<TaskInterface>
