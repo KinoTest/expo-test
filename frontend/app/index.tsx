@@ -3,7 +3,7 @@ import { i18n } from "@/locales/i18n";
 
 import FetchHandler from "./services/FetchHandlerService";
 import TaskListComponent from "./components/TasksListComponent";
-import TasksQueries from "@/lib/queries/TasksQueries";
+import TasksQueries from "@/app/queries/TasksQueries";
 
 const tasksService = new TasksQueries()
 

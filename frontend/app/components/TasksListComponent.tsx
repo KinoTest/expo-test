@@ -1,7 +1,7 @@
 import { FlatList } from "react-native";
 import { Task } from "modelos_de_proba";
 import TaskComponent from "./TaskComponent";
-import TasksQueries from "@/lib/queries/TasksQueries";
+import TasksQueries from "@/app/queries/TasksQueries";
 
 const tasksQueries = new TasksQueries()
 
