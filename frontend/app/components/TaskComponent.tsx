@@ -1,6 +1,6 @@
 import { Text, TextInput, TouchableOpacity } from "react-native";
 import KTViewComponent from "./KTViewComponent";
-import { Task } from "modelos_de_proba";
+import { Task } from "../models/Task";
 import { useEffect, useState } from "react";
 import { i18n } from "@/locales/i18n";
 import { defaultMargins, defaultSpacing, taskComponentStyle } from "../Styles";

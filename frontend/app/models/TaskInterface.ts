@@ -1,5 +1,6 @@
 import { AnemicTask } from "modelos_de_proba";
 import { Task } from "./Task";
+import { ReactElement } from "react";
 
 // TODO: Can we use circular reference for typing?
 /*

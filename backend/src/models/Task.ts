@@ -22,8 +22,8 @@ const methods: TaskMethodsObjectInterface = {
         fromManyObjects: rowsToTasks
     },
     dynamic: {
-        update: function (this: Task): Promise<Task> {
-            const taskPromise = taskRepo.update(this)
+        update: function (task: Task): Promise<Task> {
+            const taskPromise = taskRepo.update(task)
             return taskPromise
         },
         delete: function (): Promise<boolean> {

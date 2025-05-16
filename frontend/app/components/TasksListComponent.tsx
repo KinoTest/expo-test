@@ -1,5 +1,5 @@
 import { FlatList } from "react-native";
-import { Task } from "modelos_de_proba";
+import { Task } from "../models/Task";
 import TaskComponent from "./TaskComponent";
 import TasksQueries from "@/app/queries/TasksQueries";
 

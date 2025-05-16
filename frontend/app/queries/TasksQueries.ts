@@ -4,7 +4,7 @@ import { Task } from "../models/Task"
 import TasksQueriesInterface from "./TasksQueriesInterface"
 
 class TasksQueries implements TasksQueriesInterface {
-    async getAllTasks () {
+    async getAllTasks() {
         const response = await fetch(`${backendHostURL}/task/`)
         const data: taskCompatibleMap[] = await response.json()
         const output = data.map( (item) => new Task(item.description, item.done, item.id))
