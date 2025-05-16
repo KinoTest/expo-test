@@ -1,4 +1,4 @@
-import { TaskAbstract, TaskInterface, TaskMethodsObjectInterface } from "./TaskInterface"
+import { TaskAbstract, TaskMethodsObjectInterface } from "./TaskInterface"
 import TasksQueries from "../queries/TasksQueries"
 
 const taskQueries = new TasksQueries()
@@ -17,7 +17,7 @@ const methods: TaskMethodsObjectInterface = {
         }
     },
     dynamic: {
-        update: function (): Promise<TaskInterface> {
+        update: function (): Promise<Task> {
             throw new Error("//TODO: Function not implemented.")
         },
         delete: function (): Promise<boolean> {
@@ -33,11 +33,11 @@ class Task extends TaskAbstract {
         this.delete = methodsInjection ? methodsInjection.dynamic.delete :  methods.dynamic.delete
         this.update = methodsInjection ? methodsInjection.dynamic.update : methods.dynamic.update
     }
-    static read: (id: string) => Promise<TaskInterface | undefined>
-    static readAll: () => Promise<TaskInterface[]>
+    static read: (id: string) => Promise<Task | undefined>
+    static readAll: () => Promise<Task[]>
     static count: () => Promise<number>
     delete: () => Promise<boolean>
-    update: () => Promise<TaskInterface>
+    update: () => Promise<Task>
 }
 
 function addTaskStaticMethods ( methodsInjection: TaskMethodsObjectInterface = methods) {

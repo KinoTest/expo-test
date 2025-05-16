@@ -1,32 +1,36 @@
 import { AnemicTask } from "modelos_de_proba";
+import { Task } from "./Task";
 
+// TODO: Can we use circular reference for typing?
+/*
 interface TaskInterface extends AnemicTask {
-    update: ()=>Promise<TaskInterface>
+    update: ()=>Promise<Task>
     delete: ()=>Promise<boolean>
 }
+*/
 
 abstract class TaskAbstract extends AnemicTask {
-    update!: ()=>Promise<TaskInterface>
+    update!: ()=>Promise<Task>
     delete!: ()=>Promise<boolean>
-    static read: (id: string) => Promise<TaskInterface | undefined>
-    static readAll: () => Promise<TaskInterface[]>
+    static read: (id: string) => Promise<Task | undefined>
+    static readAll: () => Promise<Task[]>
     static count: () => Promise<number>
 }
 
 type TaskMethodsObjectInterface = {
     static: {
-        read(id: string): Promise<TaskInterface | undefined>
-        readAll(): Promise<TaskInterface[]>
+        read(id: string): Promise<Task | undefined>
+        readAll(): Promise<Task[]>
         count(): Promise<number>
     },
     dynamic: {
-        update(): Promise<TaskInterface>
+        update(): Promise<Task>
         delete(): Promise<boolean>
     }
 }
 
 export {
     TaskAbstract,
-    TaskInterface,
+    //TaskInterface,
     TaskMethodsObjectInterface,
 }
