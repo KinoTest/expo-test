@@ -10,6 +10,7 @@ router.get('/task/{:id}', async (request: Request<{ id?: string }>, response: Re
     response.status(200).send(output)
   })
   
+//TODO: jsonValidationMiddleware
 router.put('/task/', jsonMiddleware, async (request: Request, response: Response) => {
     const data = await tasksController.put(request.body)
     if (data === null) {
