@@ -24,6 +24,7 @@ class TasksQueries implements TasksQueriesInterface {
                 'Content-Type': 'application/json'
             }
         })
+        //TODO: exceptionService
         if (!response.ok) throw new Error(response.statusText);
         return response.json()
     }

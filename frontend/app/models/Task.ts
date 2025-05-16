@@ -6,22 +6,22 @@ const taskQueries = new TasksQueries()
 const methods: TaskMethodsObjectInterface = {
     static: {
         read: function (id: string) {
-            throw new Error("Function not implemented.")
+            throw new Error("//TODO: Function not implemented.")
         },
         readAll: function () {
             const tasksPromise = taskQueries.getAllTasks()
             return tasksPromise
         },
         count: async function () {
-            throw new Error("Function not implemented.")
+            throw new Error("//TODO: Function not implemented.")
         }
     },
     dynamic: {
         update: function (): Promise<TaskInterface> {
-            throw new Error("Function not implemented.")
+            throw new Error("//TODO: Function not implemented.")
         },
         delete: function (): Promise<boolean> {
-            throw new Error("Function not implemented.")
+            throw new Error("//TODO: Function not implemented.")
         }
     }
 }
@@ -33,6 +33,11 @@ class Task extends TaskAbstract {
         this.delete = methodsInjection ? methodsInjection.dynamic.delete :  methods.dynamic.delete
         this.update = methodsInjection ? methodsInjection.dynamic.update : methods.dynamic.update
     }
+    static read: (id: string) => Promise<TaskInterface | undefined>
+    static readAll: () => Promise<TaskInterface[]>
+    static count: () => Promise<number>
+    delete: () => Promise<boolean>
+    update: () => Promise<TaskInterface>
 }
 
 function addTaskStaticMethods ( methodsInjection: TaskMethodsObjectInterface = methods) {
