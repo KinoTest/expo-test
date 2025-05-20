@@ -3,7 +3,7 @@ import { taskCompatibleMap } from "modelos_de_proba"
 import TasksControllerAbstract from "./TasksControllerInterface.js"
 import { TasksServices } from "../service/TasksServices.js"
 
-class TasksController extends TasksControllerAbstract {
+class TasksController implements TasksControllerAbstract {
     static async get (id?: string) {
         const result = id === undefined ? Task.readAll() : Task.read(id)
         return result

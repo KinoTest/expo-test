@@ -2,7 +2,7 @@ import { prisma as orm } from "../index.js"
 import { taskCompatibleMap } from "modelos_de_proba"
 import TasksORMAbstract from "./TasksORMInterface.js"
 
-class TasksORM extends TasksORMAbstract {
+class TasksORM implements TasksORMAbstract {
     static async readAll() {
         const rowsPromise = orm.task.findMany()
         return rowsPromise

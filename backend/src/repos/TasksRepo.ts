@@ -2,7 +2,7 @@ import { Task } from "../models/Task.js"
 import { TasksORM } from "../orm/TasksORM.js"
 import TasksRepoAbstract from "./TasksRepoInterface.js"
 
-class TasksRepo extends TasksRepoAbstract {
+class TasksRepo implements TasksRepoAbstract {
     static async readAll () {
         const rows = await TasksORM.readAll()
         return Task.fromManyObjects(rows)

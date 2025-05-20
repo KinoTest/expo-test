@@ -3,7 +3,7 @@ import { backendHostURL } from "../config"
 import { Task } from "../models/Task"
 import TasksQueriesAbstract from "./TasksQueriesInterface"
 
-class TasksQuesries extends TasksQueriesAbstract {
+export default class TasksQuesries implements TasksQueriesAbstract {
     static async getAllTasks() {
         const response = await fetch(`${backendHostURL}/task/`)
         const data: taskCompatibleMap[] = await response.json()
@@ -29,5 +29,3 @@ class TasksQuesries extends TasksQueriesAbstract {
         return response.json()
     }
 }
-
-export default TasksQueries
