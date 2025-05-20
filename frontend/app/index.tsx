@@ -3,9 +3,7 @@ import { i18n } from "@/locales/i18n";
 
 import FetchHandler from "./services/FetchHandlerService";
 import TaskListComponent from "./components/TasksListComponent";
-import TasksQueries from "@/app/queries/TasksQueries";
-
-const tasksService = new TasksQueries()
+import { Task } from "./models/Task";
 
 export default function Index() {
   return (
@@ -20,7 +18,7 @@ export default function Index() {
       <Text>{i18n.t("tasks_list_title", {name: "Toño"})}</Text>
 
       <FetchHandler
-        fetchMethod={ tasksService.getAllTasks }
+        fetchMethod={ Task.readAll }
         renderComponent={TaskListComponent}
       />
 

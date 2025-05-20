@@ -1,22 +1,22 @@
 import { taskCompatibleMap } from "modelos_de_proba"
 import { backendHostURL } from "../config"
 import { Task } from "../models/Task"
-import TasksQueriesInterface from "./TasksQueriesInterface"
+import TasksQueriesAbstract from "./TasksQueriesInterface"
 
-class TasksQueries implements TasksQueriesInterface {
-    async getAllTasks() {
+class TasksQuesries extends TasksQueriesAbstract {
+    static async getAllTasks() {
         const response = await fetch(`${backendHostURL}/task/`)
         const data: taskCompatibleMap[] = await response.json()
         const output = data.map( (item) => new Task(item.description, item.done, item.id))
         return output
     }
-    async getTask(id: string) {
+    static async getTask(id: string) {
         throw new Error('//TODO: Method not implemented!')
     }
-    async postTask(task: Task) {
+    static async postTask(task: Task) {
         throw new Error('//TODO: Method not implemented!')
     }
-    async putTask(task: Task) {
+    static async putTask(task: Task) {
         const response = await fetch(`${backendHostURL}/task/`, {
             method: 'PUT',
             body: JSON.stringify(task),

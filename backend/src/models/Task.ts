@@ -3,16 +3,14 @@ import { TasksRepo } from "../repos/TasksRepo.js"
 import { taskCompatibleMap } from "modelos_de_proba"
 import { rowToTask, taskToRow, rowsToTasks } from "../lib/conversion.js"
 
-const taskRepo = new TasksRepo()
-
 const methods: TaskMethodsObjectInterface = {
     static: {
         read: function (id: string) {
-            const taskPromise = taskRepo.read(id)
+            const taskPromise = TasksRepo.read(id)
             return taskPromise
         },
         readAll: function () {
-            const tasksPromise = taskRepo.readAll()
+            const tasksPromise = TasksRepo.readAll()
             return tasksPromise
         },
         count: async function () {
@@ -23,7 +21,7 @@ const methods: TaskMethodsObjectInterface = {
     },
     dynamic: {
         update: function (task: Task): Promise<Task> {
-            const taskPromise = taskRepo.update(task)
+            const taskPromise = TasksRepo.update(task)
             return taskPromise
         },
         delete: function (): Promise<boolean> {
