@@ -1,13 +1,13 @@
 import { prisma as orm } from "../index.js"
 import { taskCompatibleMap } from "modelos_de_proba"
-import TasksORMInterface from "./TasksORMInterface.js"
+import TasksORMAbstract from "./TasksORMInterface.js"
 
-class TasksORM implements TasksORMInterface {
-    readAll() {
+class TasksORM implements TasksORMAbstract {
+    static async readAll() {
         const rowsPromise = orm.task.findMany()
         return rowsPromise
     }
-    read(id: string) {
+    static async read(id: string) {
         const rowPromise = orm.task.findUnique({
             where: {
                 id: id
@@ -15,7 +15,7 @@ class TasksORM implements TasksORMInterface {
         })
         return rowPromise
     }
-    async update(task: taskCompatibleMap) {
+    static async update(task: taskCompatibleMap) {
         try {
             const rowPromise = await orm.task.update({
                 where: {
