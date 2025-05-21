@@ -12,7 +12,7 @@ function rowsToTasks( rows: taskCompatibleMap[] ): Task[] {
 function taskToRow( task: Task ) {
     if (task.id === null) 
         //TODO: exceptionService
-        throw new Error('You must save a task before serialize it: this task has not id.')
+        throw new Error('You must save a task before serializing it: this task has not id.')
     const taskObject: taskCompatibleMap = {
         id: task.id ? task.id : '',
         description: task.description,
