@@ -11,6 +11,9 @@ interface TaskInterface extends AnemicTask {
 */
 
 abstract class TaskAbstract extends AnemicTask {
+    constructor (description: string, done: boolean, id?: string) {
+        super(description, done, id)
+    }
     update!: ()=>Promise<Task>
     delete!: ()=>Promise<boolean>
     static read: (id: string) => Promise<Task | undefined>

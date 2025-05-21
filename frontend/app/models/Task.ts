@@ -1,5 +1,5 @@
 import { TaskAbstract, TaskMethodsObjectInterface } from "./TaskInterface"
-import TasksQueries from "../queries/TasksQueries"
+import TasksRepo from "../repos/TasksRepo"
 
 const methods: TaskMethodsObjectInterface = {
     static: {
@@ -7,7 +7,7 @@ const methods: TaskMethodsObjectInterface = {
             throw new Error("//TODO: Function not implemented.")
         },
         readAll: function () {
-            const tasksPromise = TasksQueries.getAllTasks()
+            const tasksPromise = TasksRepo.getAllTasks()
             return tasksPromise
         },
         count: async function () {

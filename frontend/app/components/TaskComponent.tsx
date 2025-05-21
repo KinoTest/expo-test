@@ -1,5 +1,5 @@
 import { Text, TextInput, TouchableOpacity } from "react-native";
-import KTViewComponent from "./KTViewComponent";
+import ViewComponent from "./wrappers/ViewComponent";
 import { Task } from "../models/Task";
 import { useEffect, useState } from "react";
 import { i18n } from "@/locales/i18n";
@@ -36,7 +36,7 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
         actualTask,
     ])
 
-    return <KTViewComponent style={taskComponentStyle}>
+    return <ViewComponent style={taskComponentStyle}>
 
         { inEditionMode ?
 
@@ -61,7 +61,7 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
 
         <SwitchComponent description={i18n.t('done')} checked={actualTask.done} onToggle={onSwitchChannge}/>
 
-    </KTViewComponent>
+    </ViewComponent>
 
 }
 

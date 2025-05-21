@@ -1,27 +1,32 @@
 import { View, Text } from "react-native";
 import { i18n } from "@/locales/i18n";
 
-import FetchHandler from "./services/FetchHandlerService";
+import { globalContext, GlobalStateHook } from "./components/hooks/GlobalStateHook";
+
 import TaskListComponent from "./components/TasksListComponent";
-import { Task } from "./models/Task";
+import TasksServices from "./services/TasksServices";
+import { useContext } from "react";
+
+const {globalStates} = useContext(globalContext)
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <GlobalStateHook>
+      <TasksServices.InitializeTasksList>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
 
-      <Text>{i18n.t("tasks_list_title", {name: "Toño"})}</Text>
+          <Text>{i18n.t("tasks_list_title", {name: "Toño"})}</Text>
 
-      <FetchHandler
-        fetchMethod={ Task.readAll }
-        renderComponent={TaskListComponent}
-      />
+          <TaskListComponent tasks={globalStates.tasks}/>
 
-    </View>
+        </View>
+      </TasksServices.InitializeTasksList>
+    </GlobalStateHook>
   );
 }

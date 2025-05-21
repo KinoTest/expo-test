@@ -6,7 +6,7 @@
 
 import { useEffect, useState } from "react"
 
-export default function FetchHandler ( props: {
+export default function FetchHandlerHook ( props: {
     fetchMethod: ()=>Promise<any>,
     renderComponent: React.ComponentType<{data: any}>
 }) {

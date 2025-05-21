@@ -1,9 +1,9 @@
 import { taskCompatibleMap } from "modelos_de_proba"
 import { backendHostURL } from "../config"
 import { Task } from "../models/Task"
-import TasksQueriesAbstract from "./TasksQueriesInterface"
+import TasksRepoAbstract from "./TasksRepoAbstract"
 
-export default class TasksQuesries implements TasksQueriesAbstract {
+export default class TasksRepo implements TasksRepoAbstract {
     static async getAllTasks() {
         const response = await fetch(`${backendHostURL}/task/`)
         const data: taskCompatibleMap[] = await response.json()
