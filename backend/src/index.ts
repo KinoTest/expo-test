@@ -16,6 +16,7 @@ server.use(tasksEndpoints)
 server.listen(process.env.PORT, () => { 
   console.log("Server running at PORT: ", process.env.PORT); 
 }).on("error", (error) => {
+  //TODO: exceptionService
   throw new Error(error.message);
 });
 

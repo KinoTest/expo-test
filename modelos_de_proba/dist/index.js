@@ -1,2 +1,3 @@
+import AnemicTask from "./AnemicTask.js";
 import Task from "./Task.js";
-export { Task };
+export { AnemicTask, Task };

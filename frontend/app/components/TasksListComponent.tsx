@@ -1,16 +1,17 @@
 import { FlatList } from "react-native";
-import { Task } from "modelos_de_proba";
+import { Task } from "../models/Task";
 import TaskComponent from "./TaskComponent";
-import TasksQueries from "@/lib/queries/TasksQueries";
-
-const tasksQueries = new TasksQueries()
 
 export default function TaskListComponent (props: {data: Task[]}) {
 
     return <FlatList
         data={props.data}
-        renderItem={item => <TaskComponent task={item.item} updateTask={tasksQueries.putTask}/>}
-        keyExtractor={item => item.id ? item.id : '' } //TODO: Make Task id mandatory
+        /**
+         * FlatList provides a ListRenderItems: { index, item, separators}
+         * so we destructure to get only item: ( {item: task} )
+         */ 
+        renderItem={( {item: task} ) => <TaskComponent task={task} updateTask={task.update}/>} 
+        keyExtractor={item => item.id ? item.id : '' }
     />
 
 }

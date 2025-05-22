@@ -10,7 +10,7 @@
             "type": "chrome",
             "url": "http://localhost:8081",
             "webRoot": "${workspaceFolder}/frontend/",
-            "runtimeExecutable": "/usr/bin/brave-browser"
+            //"runtimeExecutable": "/usr/bin/brave" //For Brave browser in linux
         }
     ]
 }

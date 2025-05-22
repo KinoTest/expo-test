@@ -5,8 +5,8 @@ import { StyleSheet } from "react-native"
  * Dispersion is reject on export, so we will use specific initialization for dispersion 
  * before export.
  * 
- * Dispersion is necesary becouse a weird behavior on StyleSheet.create including some
- * some properties like flex or flexDirection.
+ * Dispersion is necesary becouse of a weird behavior on StyleSheet.create, when including some
+ * properties like flex or flexDirection.
  * 
  * defaultStyles implements theme constants.
  * 
