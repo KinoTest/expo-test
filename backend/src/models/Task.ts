@@ -31,9 +31,8 @@ const methods: TaskMethodsObjectInterface = {
     }
 }
 
-class Task extends TaskAbstract {
+class Task implements TaskAbstract {
     constructor ( description: string, done: boolean, id?: string, methodsInjection?: TaskMethodsObjectInterface ) {
-        super(description, done,  id)
         /** Using closures for injecting methods as dependencies */
         this.delete = () => {
             const method = (methodsInjection ? methodsInjection.dynamic.delete :  methods.dynamic.delete)
@@ -47,6 +46,9 @@ class Task extends TaskAbstract {
             const method = (methodsInjection ? methodsInjection.dynamic.toObject : methods.dynamic.toObject)
             return method(this)
         }
+        this.description = description
+        this.done = done
+        this.id = id
     }
     static read: (id: string) => Promise<Task | null>
     static readAll: () => Promise<Task[]>
@@ -56,6 +58,9 @@ class Task extends TaskAbstract {
     delete: () => Promise<boolean>
     update: () => Promise<Task>
     toObject: () => taskCompatibleMap
+    description: string
+    done: boolean
+    id?: string | undefined
 }
 
 function addTaskStaticMethods ( methodsInjection: TaskMethodsObjectInterface = methods) {
