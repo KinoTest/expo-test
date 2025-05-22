@@ -1,5 +1,5 @@
 import { taskCompatibleMap } from "modelos_de_proba"
-import { Task } from "../models/Task.js"
+import Task from "../models/Task.js"
 import { flushResult } from "../service/TasksServices.js"
 
 export default abstract class TasksControllerAbstract {

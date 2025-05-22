@@ -1,21 +1,16 @@
 import { Text, TextInput, TouchableOpacity } from "react-native";
-import KTViewComponent from "./KTViewComponent";
-import { Task } from "../models/Task";
+import ViewComponent from "./wrappers/ViewComponent";
+import Task from "../models/Task";
 import { useEffect, useState } from "react";
 import { i18n } from "@/locales/i18n";
 import { defaultMargins, defaultSpacing, taskComponentStyle } from "../Styles";
 import SwitchComponent from "./SwitchComponent";
 
-export default function TaskComponent (props: {task: Task, updateTask: (task: Task)=>any }) {
+export default function TaskComponent (props: {task: Task }) {
 
-    const [actualTask, setActualTask] = useState(props.task)
+    const [currentTask, setActualTask] = useState(props.task)
 
     const [inEditionMode, setInEditionMode] = useState(false)
-
-    function onSwitchChannge(checked: boolean) {
-        const newTask = new Task(actualTask.description, checked, actualTask.id)
-        setActualTask(newTask)
-    }
 
     function enableEditionMode() {
         setInEditionMode(true)
@@ -25,18 +20,30 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
         setInEditionMode(false)
     }
 
-    function onChangeText(text: string) {
-        const newTask = new Task(text, actualTask.done, actualTask.id)
-        setActualTask(newTask)
+
+    async function onSwitchChannge(checked: boolean) {
+        const newTask = new Task(currentTask.description, checked, currentTask.id)
+        try {
+            await newTask.update()
+            setActualTask(newTask)
+        }
+        catch (exception) {
+            throw exception //TODO: Exception handler
+        }
     }
 
-    useEffect(()=>{
-        props.updateTask(actualTask)
-    },[
-        actualTask,
-    ])
+    async function onChangeText(text: string) {
+        const newTask = new Task(text, currentTask.done, currentTask.id)
+        try {
+            await newTask.update()
+            setActualTask(newTask)
+        }
+        catch (exception) {
+            throw exception //TODO: Exception handler
+        }
+    }
 
-    return <KTViewComponent style={taskComponentStyle}>
+    return <ViewComponent style={taskComponentStyle}>
 
         { inEditionMode ?
 
@@ -44,7 +51,7 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
                 onChangeText={onChangeText}
                 onBlur={disableEditionMode}
                 autoFocus={true}
-                value={actualTask.description}
+                value={currentTask.description}
                 placeholder="useless placeholder"
                 style={defaultSpacing}
             />
@@ -53,15 +60,15 @@ export default function TaskComponent (props: {task: Task, updateTask: (task: Ta
 
             <TouchableOpacity onPress={enableEditionMode}>
                 <Text style={defaultMargins}>
-                    {actualTask.description}
+                    {currentTask.description}
                 </Text>
             </TouchableOpacity>
 
         }
 
-        <SwitchComponent description={i18n.t('done')} checked={actualTask.done} onToggle={onSwitchChannge}/>
+        <SwitchComponent description={i18n.t('done')} checked={currentTask.done} onToggle={onSwitchChannge}/>
 
-    </KTViewComponent>
+    </ViewComponent>
 
 }
 

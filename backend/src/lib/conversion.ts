@@ -1,5 +1,5 @@
 import { taskCompatibleMap } from "modelos_de_proba"
-import { Task } from "../models/Task.js"
+import Task from "../models/Task.js"
 
 function rowToTask ( row: taskCompatibleMap ): Task {
     return new Task(row.description, row.done, row.id)

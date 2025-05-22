@@ -1,5 +1,5 @@
 import { AnemicTask, taskCompatibleMap } from "modelos_de_proba";
-import { Task } from "./Task.js";
+import Task from "./Task.js";
 
 //TODO: Can we use circular reference for typing?
 /**

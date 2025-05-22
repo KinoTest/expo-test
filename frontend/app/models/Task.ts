@@ -1,5 +1,6 @@
-import { TaskAbstract, TaskMethodsObjectInterface } from "./TaskInterface"
-import TasksQueries from "../queries/TasksQueries"
+
+import TaskAbstract, { TaskMethodsObjectInterface } from "./TaskAbstract"
+import TasksRepo from "../repos/TasksRepo"
 
 const methods: TaskMethodsObjectInterface = {
     static: {
@@ -7,7 +8,7 @@ const methods: TaskMethodsObjectInterface = {
             throw new Error("//TODO: Function not implemented.")
         },
         readAll: function () {
-            const tasksPromise = TasksQueries.getAllTasks()
+            const tasksPromise = TasksRepo.getAllTasks()
             return tasksPromise
         },
         count: async function () {
@@ -15,8 +16,9 @@ const methods: TaskMethodsObjectInterface = {
         }
     },
     dynamic: {
-        update: function (): Promise<Task> {
-            throw new Error("//TODO: Function not implemented.")
+        update: function ( task: Task ): Promise<Task> {
+            const taskPromise = TasksRepo.putTask(task)
+            return taskPromise
         },
         delete: function (): Promise<boolean> {
             throw new Error("//TODO: Function not implemented.")
@@ -24,18 +26,26 @@ const methods: TaskMethodsObjectInterface = {
     }
 }
 
-class Task extends TaskAbstract {
+export default class Task implements TaskAbstract {
     constructor ( description: string, done: boolean, id?: string, methodsInjection?: TaskMethodsObjectInterface ) {
-        super(description, done,  id)
         /** Using closures for injecting methods as dependencies */
         this.delete = methodsInjection ? methodsInjection.dynamic.delete :  methods.dynamic.delete
-        this.update = methodsInjection ? methodsInjection.dynamic.update : methods.dynamic.update
+        this.update = ()=>{
+            const method = methodsInjection ? methodsInjection.dynamic.update : methods.dynamic.update
+            return method(this)
+        }
+        this.description =description
+        this.done = done
+        this.id = id
     }
     static read: (id: string) => Promise<Task | undefined>
     static readAll: () => Promise<Task[]>
     static count: () => Promise<number>
     delete: () => Promise<boolean>
     update: () => Promise<Task>
+    description: string
+    done: boolean
+    id?: string | undefined
 }
 
 function addTaskStaticMethods ( methodsInjection: TaskMethodsObjectInterface = methods) {
@@ -45,7 +55,3 @@ function addTaskStaticMethods ( methodsInjection: TaskMethodsObjectInterface = m
 }
 
 addTaskStaticMethods()
-
-export {
-    Task
-}
