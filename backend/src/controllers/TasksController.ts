@@ -1,4 +1,4 @@
-import { Task } from "../models/Task.js"
+import Task from "../models/Task.js"
 import { taskCompatibleMap } from "modelos_de_proba"
 import TasksControllerAbstract from "./TasksControllerInterface.js"
 import { TasksServices } from "../service/TasksServices.js"

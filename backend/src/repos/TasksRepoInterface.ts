@@ -1,4 +1,4 @@
-import { Task } from "../models/Task.js"
+import Task from "../models/Task.js"
 
 export default abstract class TasksRepoAbstract {
     static readAll: () => Promise<Task[]>

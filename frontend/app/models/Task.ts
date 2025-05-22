@@ -1,4 +1,5 @@
-import { TaskAbstract, TaskMethodsObjectInterface } from "./TaskInterface"
+
+import TaskAbstract, { TaskMethodsObjectInterface } from "./TaskAbstract"
 import TasksRepo from "../repos/TasksRepo"
 
 const methods: TaskMethodsObjectInterface = {
@@ -15,8 +16,9 @@ const methods: TaskMethodsObjectInterface = {
         }
     },
     dynamic: {
-        update: function (): Promise<Task> {
-            throw new Error("//TODO: Function not implemented.")
+        update: function ( task: Task ): Promise<Task> {
+            const taskPromise = TasksRepo.putTask(task)
+            return taskPromise
         },
         delete: function (): Promise<boolean> {
             throw new Error("//TODO: Function not implemented.")
@@ -24,11 +26,14 @@ const methods: TaskMethodsObjectInterface = {
     }
 }
 
-class Task implements TaskAbstract {
+export default class Task implements TaskAbstract {
     constructor ( description: string, done: boolean, id?: string, methodsInjection?: TaskMethodsObjectInterface ) {
         /** Using closures for injecting methods as dependencies */
         this.delete = methodsInjection ? methodsInjection.dynamic.delete :  methods.dynamic.delete
-        this.update = methodsInjection ? methodsInjection.dynamic.update : methods.dynamic.update
+        this.update = ()=>{
+            const method = methodsInjection ? methodsInjection.dynamic.update : methods.dynamic.update
+            return method(this)
+        }
         this.description =description
         this.done = done
         this.id = id
@@ -50,7 +55,3 @@ function addTaskStaticMethods ( methodsInjection: TaskMethodsObjectInterface = m
 }
 
 addTaskStaticMethods()
-
-export {
-    Task
-}

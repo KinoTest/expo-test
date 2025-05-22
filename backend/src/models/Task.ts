@@ -31,7 +31,7 @@ const methods: TaskMethodsObjectInterface = {
     }
 }
 
-class Task implements TaskAbstract {
+export default class Task implements TaskAbstract {
     constructor ( description: string, done: boolean, id?: string, methodsInjection?: TaskMethodsObjectInterface ) {
         /** Using closures for injecting methods as dependencies */
         this.delete = () => {
@@ -72,7 +72,3 @@ function addTaskStaticMethods ( methodsInjection: TaskMethodsObjectInterface = m
 }
 
 addTaskStaticMethods()
-
-export {
-    Task
-}

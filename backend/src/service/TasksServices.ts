@@ -1,4 +1,4 @@
-import { Task } from "../models/Task.js";
+import Task from "../models/Task.js";
 
 type flushResult = { deleted: Task[], failed: Task []}
 

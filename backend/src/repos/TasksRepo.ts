@@ -1,4 +1,4 @@
-import { Task } from "../models/Task.js"
+import Task from "../models/Task.js"
 import { TasksORM } from "../orm/TasksORM.js"
 import TasksRepoAbstract from "./TasksRepoInterface.js"
 

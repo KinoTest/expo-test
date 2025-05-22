@@ -1,6 +1,6 @@
 import { taskCompatibleMap } from "modelos_de_proba"
 import { backendHostURL } from "../config"
-import { Task } from "../models/Task"
+import Task from "../models/Task"
 import TasksRepoAbstract from "./TasksRepoAbstract"
 
 export default class TasksRepo implements TasksRepoAbstract {
@@ -26,6 +26,8 @@ export default class TasksRepo implements TasksRepoAbstract {
         })
         //TODO: exceptionService
         if (!response.ok) throw new Error(response.statusText);
-        return response.json()
+        const data: taskCompatibleMap = await response.json()
+        const updatedTask = new Task(data.description, data.done, data.id)
+        return updatedTask
     }
 }
