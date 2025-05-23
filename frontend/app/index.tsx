@@ -1,6 +1,5 @@
-import { useRouter } from 'expo-router';
 import { Pressable, Button } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 
 export default function Home() {
