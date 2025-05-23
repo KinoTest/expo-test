@@ -1,7 +1,6 @@
 import { Pressable, Button } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
-
 export default function Home() {
   const router = useRouter()
 
@@ -11,17 +10,17 @@ export default function Home() {
 
   return (
     <>
+
       <Link href="./patients/">
-        
-          <Button title='go to Patients by "Link"'/>
-        
+        <Button title='go to Patients by "Link"'/>
       </Link>
 
       <Pressable>
         <Button title='go to Patients by code' onPress={goToPatients}/>
       </Pressable>
-      
-    </>
+
+    </>  
+
   )
 
 }

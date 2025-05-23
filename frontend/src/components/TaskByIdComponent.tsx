@@ -1,20 +1,15 @@
-import { useState, Dispatch, SetStateAction } from "react";
-import Task from "../models/Task";
+import { useContext } from "react";
 import TaskComponent from "./TaskComponent";
+import { globalContext } from "./hooks/GlobalContextHook";
 
 export default function TaskByIdComponent ( props: { taskId: string } ) {
 
-    const [ task , setTask ] = useState() as [ Task | undefined , Dispatch<SetStateAction<Task>>]
+    const { globalStates } = useContext(globalContext)
 
-    async function getTaskById( id: string ) {
-        const task = await Task.read(id)
-        if (task === undefined) throw new Error(`There is no task with id "${id}"`)
-        setTask(task)
-    }
+    const task = globalStates.tasks.find( task => task.id === props.taskId )
 
-    getTaskById( props.taskId )
+    if (task === undefined) throw new Error(`There is no task with id "${props.taskId}"`)
 
-    if ( task instanceof Task ) return <TaskComponent task={task}/>
-    else return <>...</> //TODO: Loading... component
+    return <TaskComponent task={task}/>
 
 }

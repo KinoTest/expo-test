@@ -14,6 +14,6 @@ export default function InitializeContextHook( props: PropsWithChildren ) {
 
     if ( !globalStates.initialized ) initializeTasks()
 
-    return props.children
+    return globalStates.initialized ? props.children : <>Loading...</> //TODO: Loading... component
 
 }
