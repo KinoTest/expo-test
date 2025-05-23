@@ -1,6 +1,6 @@
-import { GlobalContextHook } from "./components/hooks/GlobalContextHook";
-import HomeView from "./components/views/HomeView";
-import InitializeContextHook from "./components/hooks/InitializeContextHook";
+import { GlobalContextHook } from "../src/components/hooks/GlobalContextHook";
+import HomeView from "../src/components/views/HomeView";
+import InitializeContextHook from "../src/components/hooks/InitializeContextHook";
 
 export default function Index() {
 

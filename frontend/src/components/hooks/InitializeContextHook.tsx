@@ -1,6 +1,6 @@
 import { PropsWithChildren, useContext } from "react"
 import { globalContext } from "./GlobalContextHook"
-import Task from "@/app/models/Task"
+import Task from "@/src/models/Task"
 
 export default function InitializeContextHook( props: PropsWithChildren ) {
     
