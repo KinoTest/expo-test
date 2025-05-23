@@ -1,4 +1,4 @@
-import Task from "@/app/models/Task"
+import Task from "@/src/models/Task"
 import { Dispatch, SetStateAction } from "react"
 
 type globalStateObject = {

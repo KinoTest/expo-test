@@ -1,5 +1,5 @@
 import { taskCompatibleMap } from "modelos_de_proba"
-import { backendHostURL } from "../config"
+import { backendHostURL } from "../../src/config"
 import { Task } from "../models/Task"
 import TasksQueriesAbstract from "./TasksQueriesInterface"
 

@@ -1,4 +1,4 @@
-import Task from "@/app/models/Task";
+import Task from "@/src/models/Task";
 import { createContext, PropsWithChildren, useState } from "react";
 import globalStateObject from "./globalStateObject";
 
