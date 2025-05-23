@@ -5,7 +5,8 @@ import TasksRepo from "../repos/TasksRepo"
 const methods: TaskMethodsObjectInterface = {
     static: {
         read: function (id: string) {
-            throw new Error("//TODO: Function not implemented.")
+            const taskPromise = TasksRepo.getTask(id)
+            return taskPromise
         },
         readAll: function () {
             const tasksPromise = TasksRepo.getAllTasks()

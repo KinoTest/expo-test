@@ -1,16 +1,25 @@
 import { Text, TextInput, TouchableOpacity } from "react-native";
 import ViewComponent from "./wrappers/ViewComponent";
 import Task from "../models/Task";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { i18n } from "@/locales/i18n";
 import { defaultMargins, defaultSpacing, taskComponentStyle } from "../Styles";
 import SwitchComponent from "./SwitchComponent";
+import { useRouter } from "expo-router";
+import { useRoute } from "@react-navigation/native";
 
 export default function TaskComponent (props: {task: Task }) {
+
+    const router = useRouter()
+    const currenRoute = useRoute()
 
     const [currentTask, setActualTask] = useState(props.task)
 
     const [inEditionMode, setInEditionMode] = useState(false)
+
+    function goToTask() {
+        router.navigate(`${currenRoute.name}/${props.task.id}`)
+    }
 
     function enableEditionMode() {
         setInEditionMode(true)
@@ -67,6 +76,10 @@ export default function TaskComponent (props: {task: Task }) {
         }
 
         <SwitchComponent description={i18n.t('done')} checked={currentTask.done} onToggle={onSwitchChannge}/>
+
+        <TouchableOpacity onPress={goToTask}>
+            <Text>Go...</Text>
+        </TouchableOpacity>
 
     </ViewComponent>
 

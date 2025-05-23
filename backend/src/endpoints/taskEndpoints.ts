@@ -6,6 +6,7 @@ const router = Router()
 
 router.get('/task/{:id}', async (request: Request<{ id?: string }>, response: Response) => {
     const output = await TasksController.get(request.params.id)
+    if (output === null) response.status(404).json(output)
     response.status(200).json(output)
   })
   

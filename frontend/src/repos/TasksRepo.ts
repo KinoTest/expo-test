@@ -6,12 +6,17 @@ import TasksRepoAbstract from "./TasksRepoAbstract"
 export default class TasksRepo implements TasksRepoAbstract {
     static async getAllTasks() {
         const response = await fetch(`${backendHostURL}/task/`)
+        if (!response.ok) throw new Error(response.statusText)
         const data: taskCompatibleMap[] = await response.json()
         const output = data.map( (item) => new Task(item.description, item.done, item.id))
         return output
     }
     static async getTask(id: string) {
-        throw new Error('//TODO: Method not implemented!')
+        const response = await fetch(`${backendHostURL}/task/${id}`)
+        if (!response.ok) throw new Error(response.statusText)
+        const data: taskCompatibleMap = await response.json()
+        const output = new Task(data.description, data.done, data.id)
+        return output
     }
     static async postTask(task: Task) {
         throw new Error('//TODO: Method not implemented!')
