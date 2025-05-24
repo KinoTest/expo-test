@@ -8,7 +8,7 @@ import { defaultMargins, defaultSpacing, taskComponentStyle } from "../Styles";
 import SwitchComponent from "./SwitchComponent";
 import { useStateForPath } from "@react-navigation/native";
 
-export default function TaskComponent (props: {task: Task }) {
+export default function TaskComponent (props: {task: Task, onTaskUpdate: (task: Task) => undefined }) {
 
     const router = useRouter()
     const currenRouteList = useStateForPath() ?? {routes:[{name:'/'}]}
@@ -29,26 +29,25 @@ export default function TaskComponent (props: {task: Task }) {
         setInEditionMode(false)
     }
 
-    async function onSwitchChannge(checked: boolean) {
-        const newTask = new Task(currentTask.description, checked, currentTask.id)
+    function updateTask( newTask: Task ) {
         try {
-            await newTask.update()
+            newTask.update()
             setActualTask(newTask)
+            props.onTaskUpdate( newTask )
         }
         catch (exception) {
             throw exception //TODO: Exception handler
         }
     }
 
+    async function onSwitchChannge(checked: boolean) {
+        const newTask = new Task(currentTask.description, checked, currentTask.id)
+        updateTask(newTask)
+    }
+
     async function onChangeText(text: string) {
         const newTask = new Task(text, currentTask.done, currentTask.id)
-        try {
-            await newTask.update()
-            setActualTask(newTask)
-        }
-        catch (exception) {
-            throw exception //TODO: Exception handler
-        }
+        updateTask(newTask)
     }
 
     return <ViewComponent style={taskComponentStyle}>

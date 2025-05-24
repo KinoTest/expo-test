@@ -9,7 +9,7 @@ type globalStateObject = {
         globalDispatchers: {
             setInitialized: Dispatch<SetStateAction<boolean>>
             setTasks: Dispatch<SetStateAction<Task[]>>
-            updateTasks: ()=> Promise<undefined>
+            updateTaskInGlobalState: ( task: Task ) => undefined
         }
     }
 

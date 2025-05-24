@@ -17,9 +17,13 @@ export default function GlobalContextHook ( props: PropsWithChildren & { state?:
         globalDispatchers: {
             setInitialized,
             setTasks,
-            updateTasks: async () => {
-                const tasks = await Task.readAll()
-                setTasks(tasks)
+            updateTaskInGlobalState: ( updatedTask ) => {
+                const oldTaskIndex = tasks.findIndex( task => task.id === updatedTask.id)
+                setTasks([
+                    ...tasks.slice(0, oldTaskIndex),
+                    updatedTask,
+                    ...tasks.slice(oldTaskIndex+1)
+                ])
             }
         }
     }
