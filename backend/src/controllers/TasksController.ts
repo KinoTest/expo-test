@@ -1,15 +1,15 @@
-import Task from "../models/Task.js"
+import TasksRepo from "../repos/TasksRepo.js"
 import { taskCompatibleMap } from "modelos_de_proba"
 import TasksControllerAbstract from "./TasksControllerInterface.js"
 import { TasksServices } from "../service/TasksServices.js"
 
 class TasksController implements TasksControllerAbstract {
     static async get (id?: string) {
-        const result = id === undefined ? Task.readAll() : Task.read(id)
+        const result = id === undefined ? TasksRepo.readAll() : TasksRepo.read(id)
         return result
     }
     static async put (taskObject: taskCompatibleMap) {
-        const task = Task.fromObject(taskObject)
+        const task = TasksRepo.rowToTask(taskObject)
         const updatedTaskPromise = task.update()
         return updatedTaskPromise
     }
