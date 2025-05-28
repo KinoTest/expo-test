@@ -1,4 +1,4 @@
-import { TaskAbstract } from "./TaskInterface.js"
+import TaskAbstract from "./TaskAbstract.js"
 import TasksRepo from "../repos/TasksRepo.js"
 import { taskCompatibleMap } from "modelos_de_proba"
 
